@@ -63,27 +63,23 @@ local function complex_ident(val, ident, left, right)
 end
 
 function json.should_treat_as_array(val)
-  if val[1] ~= nil or next(val) == nil then
-    -- check keys are valid and it is not sparse
-    local n = 0
-    for k in pairs(val) do
-      if type(k) ~= "number" then
-        error("invalid table: mixed or invalid key types")
-      end
-      n = n + 1
-    end
-    if n ~= #val then
-      error("invalid table: sparse array")
-    end
-    return true
-  else
+  if val[1] == nil and next(val) ~= nil then
     return false
   end
+  local n = 0
+  for k in pairs(val) do
+    if type(k) ~= "number" then return false end
+    n = n + 1
+  end
+  return n == #val
 end
 
 function json.object_key_to_string(k)
+  if type(k) == "number" then
+    k = tostring(k)
+  end
   if type(k) ~= "string" then
-    error("invalid table: mixed or invalid key types")
+    error(string.format("invalid table: key of type %s found", type(k)))
   end
   return k
 end

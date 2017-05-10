@@ -197,16 +197,28 @@ end)
 
 test("encode invalid", function()
   local t = {
-    { [1000] = "b" },
     { [ function() end ] = 12 },
-    { nil, 2, 3, 4 },
-    { x = 10, [1] = 2 },
-    { [1] = "a", [3] = "b" },
-    { x = 10, [4] = 5 },
+    { [ true ]  = 42 },
+    { x = 10, [{}] = 5 },
   }
   for i, v in ipairs(t) do
     local status, res = pcall(json.encode, v)
     assert( not status, fmt("encoding idx %d did not result in an error", i) )
+  end
+end)
+
+
+test("encode sparse", function()
+  local t = {
+    [ { [1000] = "b" } ] = { ["1000"] = "b" },
+    [ { nil, 2, 3, 4 } ] = { ["2"] = 2, ["3"] = 3, ["4"] = 4 },
+    [ { x = 10, [1] = 2 } ] = { x = 10, ["1"] = 2 },
+    [ { [1] = "a", [3] = "b" } ] = { ["1"] = "a", ["3"] = "b" },
+    [ { x = 10, [4] = 5 } ] = { x = 10, ["4"] = 5 },
+  }
+  for k, v in pairs(t) do
+    local res = json.decode(json.encode(k))
+    assert( equal(res, v), fmt("encoding of '%s' failed", json.encode(k, false)) )
   end
 end)
 
