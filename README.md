@@ -4,7 +4,7 @@
 
 This is Lima's version of the JSON wheel. It is a fork of [rxi/json.lua](https://github.com/rxi/json.lua).
 
-Typically we only use the encoder with Lua 5.3. Consider other use cases unsupported (see [Alternatives](#Alternatives)).
+Typically we only use the encoder with Lua 5.3. Consider other use cases unsupported (see [Alternatives](#alternatives)).
 
 ## Dependencies
 
