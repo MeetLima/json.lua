@@ -46,7 +46,7 @@ test("numbers", function()
     for k, v in pairs(t) do
         local res = json.decode(k)
         assert( res == v, fmt("expected '%s', got '%s'", k, res) )
-        local res = json.encode(v)
+        res = json.encode(v)
         assert( res == k, fmt("expected '%s', got '%s'", v, res) )
     end
     assert( json.decode("13e2") == 13e2 )
@@ -68,7 +68,7 @@ end)
 test("strings", function()
     local s = "Hello world"
     assert( s == json.decode( json.encode(s) ) )
-    local s = "\0 \13 \27"
+    s = "\0 \13 \27"
     assert( s == json.decode( json.encode(s) ) )
 end)
 
@@ -110,7 +110,7 @@ test("decode invalid", function()
         '[}',
         '"a',
     }
-    for i, v in ipairs(t) do
+    for _, v in ipairs(t) do
         local status = pcall(json.decode, v)
         assert( not status, fmt("'%s' was parsed without error", v) )
     end
@@ -126,8 +126,8 @@ test("decode invalid string", function()
         '"x\ny"',
         '"x\0y"',
     }
-    for i, v in ipairs(t) do
-        local status, err = pcall(json.decode, v)
+    for _, v in ipairs(t) do
+        local status = pcall(json.decode, v)
         assert( not status, fmt("'%s' was parsed without error", v) )
     end
 end)
@@ -183,7 +183,7 @@ test("encode invalid", function()
         { x = 10, [{}] = 5 },
     }
     for i, v in ipairs(t) do
-        local status, res = pcall(json.encode, v)
+        local status = pcall(json.encode, v)
         assert( not status, fmt("encoding idx %d did not result in an error", i) )
     end
 end)
@@ -210,8 +210,8 @@ test("encode invalid number", function()
         -math.huge,     -- -inf
         math.huge * 0,  -- NaN
     }
-    for i, v in ipairs(t) do
-        local status, res = pcall(json.encode, v)
+    for _, v in ipairs(t) do
+        local status = pcall(json.encode, v)
         assert( not status, fmt("encoding '%s' did not result in an error", v) )
     end
 end)
