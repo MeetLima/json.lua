@@ -23,6 +23,12 @@ None except Lua 5.3.
     > json.encode({foo = { bar = "baz", answer = 42 }}, false) -- no pretty printing
     {"foo":{"bar":"baz","answer":42}}
 
+## Alternatives
+
+For a full-featured, pure Lua + LPeg JSON encoder / decoder, check out [luajson](https://github.com/harningt/luajson).
+
+Otherwise, there are plenty of options [in LuaRocks](https://luarocks.org/labels/json).
+
 ## License
 
 This library is free software; you can redistribute it and/or modify it under
