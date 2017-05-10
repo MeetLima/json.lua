@@ -2,9 +2,10 @@
 -- json.lua
 --
 -- Copyright (c) 2015 rxi
+-- Copyright (c) 2017 Lima Technology
 --
 -- This library is free software; you can redistribute it and/or modify it
--- under the terms of the MIT license. See LICENSE for details.
+-- under the terms of the MIT license. See LICENSE.txt for details.
 --
 
 local json = { _version = "0.1.0", PRETTY_PRINT = true }

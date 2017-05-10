@@ -4,7 +4,7 @@ version = "scm-1"
 source = { url = "git://github.com/MeetLima/json.lua.git" }
 
 description = {
-   summary = "Lima fork of json.lua.",
+   summary = "Lima's version of the JSON wheel.",
    detailed = [[
       Very simple single-file json module.
       This fork only targets Lua 5.3.
