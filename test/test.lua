@@ -81,6 +81,10 @@ test("unicode", function()
   assert( s == json.decode( json.encode(s) ) )
 end)
 
+test("unicode escaping", function()
+  assert( json.decode([["\uD834\uDD1E"]]) == "𝄞")
+  assert( json.decode([["\u2605"]]) == "★")
+end)
 
 test("arrays", function()
   local t = { "cat", "dog", "owl" }

@@ -186,32 +186,14 @@ local function decode_error(str, idx, msg)
   error( fmt("%s at line %d col %d", msg, line_count, col_count) )
 end
 
-
-local function codepoint_to_utf8(n)
-    -- http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=iws-appendixa
-    local f = math.floor
-    if n <= 0x7f then
-        return string.char(n)
-    elseif n <= 0x7ff then
-        return string.char(f(n / 64) + 192, n % 64 + 128)
-    elseif n <= 0xffff then
-        return string.char(f(n / 4096) + 224, f(n % 4096 / 64) + 128, n % 64 + 128)
-    elseif n <= 0x10ffff then
-        return string.char(f(n / 262144) + 240, f(n % 262144 / 4096) + 128,
-                           f(n % 4096 / 64) + 128, n % 64 + 128)
-    end
-    error( fmt("invalid unicode codepoint '%x'", n) )
-end
-
-
 local function parse_unicode_escape(s)
     local n1 = tonumber( s:sub(3, 6),  16 )
     local n2 = tonumber( s:sub(9, 12), 16 )
     -- Surrogate pair?
     if n2 then
-        return codepoint_to_utf8((n1 - 0xd800) * 0x400 + (n2 - 0xdc00) + 0x10000)
+        return utf8.char((n1 - 0xd800) * 0x400 + (n2 - 0xdc00) + 0x10000)
     else
-        return codepoint_to_utf8(n1)
+        return utf8.char(n1)
     end
 end
 
