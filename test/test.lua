@@ -60,7 +60,7 @@ end)
 
 test("literals", function()
   assert( json.decode("true") == true )
-  assert( json.encode(true) == "true" ) 
+  assert( json.encode(true) == "true" )
   assert( json.decode("false") == false )
   assert( json.encode(false) == "false" )
   assert( json.decode("null") == nil )
