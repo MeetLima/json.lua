@@ -1,4 +1,9 @@
-local M = { _version = "0.2.0", PRETTY_PRINT = true }
+local M = {
+    is_lima = true,
+    _version = "0.2.0",
+    PRETTY_PRINT = true,
+}
+
 local fmt = string.format
 
 
